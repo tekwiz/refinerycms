@@ -8,7 +8,6 @@ module Refinery
               :include => [:translations, :children],
               :paging => false
 
-      before_filter :load_valid_templates, :only => [:edit, :new, :create, :update]
       before_filter :restrict_access, :only => [:create, :update, :update_positions, :destroy]
 
       def new
@@ -83,13 +82,6 @@ module Refinery
         else
           Globalize.locale = Refinery::I18n.default_frontend_locale
         end
-      end
-
-      def load_valid_templates
-        @valid_layout_templates = Pages.layout_template_whitelist &
-                                  Pages.valid_templates('app', 'views', '{layouts,refinery/layouts}', '*html*')
-
-        @valid_view_templates = Pages.valid_templates('app', 'views', '{pages,refinery/pages}', '*html*')
       end
 
       def restrict_access

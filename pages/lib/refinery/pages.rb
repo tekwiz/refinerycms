@@ -23,13 +23,13 @@ module Refinery
         @factory_paths ||= [ root.join('spec', 'factories').to_s ]
       end
 
-      def valid_templates(*pattern)
-        ([Rails.root] | Refinery::Plugins.registered.pathnames).map { |p|
-          Dir[p.join(*pattern).to_s].flatten.map { |f|
-            File.basename(f).split('.').first
-          }
-        }.flatten.uniq
-      end
+      # def valid_templates(*pattern)
+      #   ([Rails.root] | Refinery::Plugins.registered.pathnames).map { |p|
+      #     Dir[p.join(*pattern).to_s].flatten.map { |f|
+      #       File.basename(f).split('.').first
+      #     }
+      #   }.flatten.uniq
+      # end
 
       def default_parts_for(page)
         return default_parts unless page.view_template.present?

@@ -39,7 +39,10 @@ module Refinery
     }
     self.show_title_in_body = true
     self.absolute_page_links = false
-    self.types = Types.registered
+    self.types = Types.registered.tap do |types|
+      types.register(:home)
+      types.register(:show)
+    end
     self.auto_expand_admin_tree = true
   end
 end
